@@ -1,18 +1,18 @@
-//CommonJS - every file in Node is module
+const http = require('http');
 
-const names = require('./4-exportar-nomes');
-const {igor, felipe} = require('./4-exportar-nomes');
-const sayHi = require('./5-exportar-funcao-lambda');
-const {items, singlePerson} = require('./6-formas-alternativas-de-exportar');
-require('./7-module-executa-automatico-sem-atribuir-require-a-constante');
+const server = http.createServer((req, res) => {
+    if (req.url === '/'){
+        res.end('Welcome')
+    }
+    if (req.url === '/about'){
+        res.end('Hi there')
+    }
+    
+    res.end(`
+    <h1>Oops!</h1>
+    <p>We can't seem to find the page you are looking for</p>
+    <a href="/">back home</a>
+    `);
+})
 
-
-console.log(names);
-
-sayHi('Jorge');
-sayHi(names.igor);
-sayHi(felipe);
-
-
-console.log(items);
-console.log(singlePerson);
+server.listen(5000);
